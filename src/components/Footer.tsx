@@ -62,21 +62,12 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-background/60 text-xs font-mono mt-0.5">TEL</span>
-                <a
-                  href="tel:+5511996151152"
-                  className="text-sm font-mono text-background/80 hover:text-background transition-swiss"
-                >
-                  (11) 99615-1152
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
                 <span className="text-background/60 text-xs font-mono mt-0.5">EMAIL</span>
                 <a
-                  href="mailto:dan_bar@live.com"
+                  href="mailto:contato@parametrizabim.com"
                   className="text-sm font-mono text-background/80 hover:text-background transition-swiss break-all"
                 >
-                  dan_bar@live.com
+                  contato@parametrizabim.com
                 </a>
               </li>
             </ul>

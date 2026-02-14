@@ -35,6 +35,12 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: List dist
+        run: ls -la dist || true
+
+      - name: List dist/public
+        run: ls -la dist/public || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

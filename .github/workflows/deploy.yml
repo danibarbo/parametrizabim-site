@@ -41,6 +41,9 @@ jobs:
       - name: List dist/public
         run: ls -la dist/public || true
 
+      - name: Disable Jekyll
+        run: touch dist/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -1,17 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=./" />
-    <script>
-      // SPA fallback for GitHub Pages
-      var path = location.pathname.replace(/\/$/, "");
-      var repo = "/parametrizabim-site";
-      if (path.startsWith(repo)) {
-        location.replace(repo + "/");
-      } else {
-        location.replace("./");
-      }
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      var segmentCount = 1; // 1 = nome do repositório (/parametrizabim-site)
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + segmentCount)
+            .join("/") +
+          "/?/" +
+          l.pathname
+            .split("/")
+            .slice(1 + segmentCount)
+            .join("/")
+            .replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash
+      );
     </script>
   </head>
   <body></body>

@@ -7,8 +7,9 @@ export default function NotFound() {
   const [, setLocation] = useLocation();
 
   const handleGoHome = () => {
-    setLocation(import.meta.env.BASE_URL);
-  };
+  setLocation("/");
+};
+
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">

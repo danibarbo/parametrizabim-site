@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parametriza BIM – Engenharia de Precisão</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 120px;
+        }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            color: #111;
+            background: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        :root {
+            --azul-noite: #031638;
+            --cinza-claro: #bebebe;
+            --cinza-medio: #b3b3b3;
+            --cinza-texto: #7e7e7e;
+            --azul-marca: #017fc1;
+            --azul-escuro: #083e9e;
+            --azul-servicos-ativo: #017ec13f;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 200;
+            background: var(--azul-noite);
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(24px, 7vw, 160px);
+            height: 110px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, .9);
+            font-size: 18px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .btn-contato {
+            background: #fff;
+            color: #000;
+            padding: 11px 28px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: background .2s;
+            white-space: nowrap;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: var(--azul-noite);
+            flex-direction: column;
+            padding: 20px 24px 28px;
+            gap: 18px;
+            z-index: 199;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: rgba(255, 255, 255, .85);
+            font-size: 16px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .mobile-nav .btn-contato {
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: url('Horizontal.png') center center / cover no-repeat;
+            padding-top: 110px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 20px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 560px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 3.2vw, 40px);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 28px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, .65);
+            font-weight: 700;
+            line-height: 1.75;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+        }
+
+        /* Pillars */
+        .pillars {
+            padding: 22px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .pillar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 36px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .pillar-dot {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ─── SEÇÃO BASE ─── */
+        section {
+            padding: 20px clamp(24px, 7vw, 160px);
+        }
+
+        .section-title {
+            font-size: clamp(26px, 2.8vw, 36px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cinza-texto);
+            max-width: 720px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        /* ─── SERVIÇOS ─── */
+        .services {
+            background: #fff;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            padding-bottom: 0;
+        }
+
+        .services-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 1260px;
+            margin: 0 auto 70px;
+        }
+
+        .services-divider {
+            display: none;
+        }
+
+        .service-col {
+            padding: 36px 32px 40px;
+            border: 1px solid var(--cinza-claro);
+            background: linear-gradient(180deg, #fff 0%, #d9d9d9 100%);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform .2s;
+        }
+
+        .service-col:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-col:first-child {
+            padding-right: 32px;
+        }
+
+        .service-col:last-child {
+            padding-left: 32px;
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            margin-bottom: 22px;
+            color: var(--azul-marca);
+        }
+
+        .service-col h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .service-col p {
+            font-size: 16px;
+            color: var(--cinza-texto);
+            line-height: 1.65;
+            font-weight: 700;
+        }
+
+        /* Tabs */
+        .services-tabs {
+            max-width: 1260px;
+            margin: 0 auto;
+        }
+
+        .tabs-bar {
+            margin-bottom: 30px;
+            display: flex;
+            padding: 16px 24px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 6px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .tab-btn.active {
+            border-color: var(--azul-marca);
+            background: var(--azul-servicos-ativo);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .tab-img-placeholder {
+            width: 100%;
+            min-height: 380px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .tab-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            min-height: 380px;
+            object-fit: cover;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .tab-info {
+            padding: 52px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tab-info h3 {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tab-info>p {
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .tab-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .tab-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .tab-list li::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background: var(--azul-marca);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ─── AUTODESK CERT ─── */
+        .cert-strip {
+            background: #f7f7f7;
+            border-top: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4;
+            padding: 22px clamp(24px, 7vw, 160px);
+        }
+
+        .cert-strip-inner {
+            max-width: 1260px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-badge-strip {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cert-icon {
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+            object-fit: contain;
+        }
+
+        .cert-badge-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .cert-badge-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cinza-texto);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .cert-badge-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .cert-divider {
+            width: 1px;
+            height: 44px;
+            background: #d0d0d0;
+            margin: 0 28px;
+        }
+
+        .cert-badge-desc {
+            font-size: 14px;
+            color: var(--cinza-texto);
+            font-weight: 600;
+            max-width: 340px;
+            line-height: 1.55;
+        }
+
+        /* ─── BENEFÍCIOS ─── */
+        .benefits {
+            background: #fff;
+            margin-bottom: 100px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1260px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            border: 1px solid var(--cinza-claro);
+            background: linear-gradient(180deg, #fff 0%, #d9d9d9 100%);
+            border-radius: 14px;
+            padding: 36px 32px 40px;
+            transition: transform .2s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .benefit-icon {
+            width: 44px;
+            height: 44px;
+            color: var(--azul-marca);
+            margin-bottom: 18px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .benefit-card p {
+            font-size: 16px;
+            color: var(--cinza-texto);
+            font-weight: 600;
+            line-height: 1.65;
+        }
+
+        /* ─── ENTREGAS ─── */
+        .deliveries {
+            background: #fff;
+            margin-bottom: 100px;
+        }
+
+        .deliveries-slider-outer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            max-width: 1340px;
+            margin: 0 auto;
+        }
+
+        .deliveries-nav-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--azul-marca);
+            background: #fff;
+            color: var(--azul-marca);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, color .2s, opacity .2s;
+        }
+
+        .deliveries-nav-btn:hover:not(:disabled) {
+            background: var(--azul-marca);
+            color: #fff;
+        }
+
+        .deliveries-nav-btn:disabled {
+            opacity: 0.25;
+            cursor: default;
+        }
+
+        .deliveries-nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .deliveries-slider-track {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .deliveries-slider-inner {
+            display: flex;
+            transition: transform .4s ease;
+        }
+
+        .deliveries-page {
+            flex: 0 0 100%;
+        }
+
+        .deliveries-grid {
+            display: flex;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .delivery-col-lateral {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .delivery-col-central {
+            flex: 1;
+            min-width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #panorama-entregas {
+            width: 100%;
+            flex: 1;
+            border-radius: 4px;
+            border: none;
+            display: block;
+        }
+
+        .delivery-ph {
+            flex: none;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #000;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, .2);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* ─── FEEDBACKS ─── */
+        .feedbacks {
+            background: #fff;
+            margin-bottom: 100px;
+        }
+
+        .feedbacks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(220px, 1fr));
+            gap: clamp(20px, 5vw, 100px);
+            max-width: 1260px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .feedback-card {
+            background: linear-gradient(180deg, var(--azul-noite) 0%, var(--azul-escuro) 100%);
+            box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.6);
+            border-radius: 14px;
+            padding: 36px 32px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .feedback-divider {
+            height: 1px;
+            background: #fff;
+            margin-bottom: 22px;
+        }
+
+        .feedback-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #fff;
+            flex: 1;
+            margin-bottom: 50px;
+        }
+
+        .feedback-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .feedback-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            border: 2px solid rgba(255, 255, 255, .3);
+            flex-shrink: 0;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: rgba(255, 255, 255, .4);
+            text-align: center;
+        }
+
+        .feedback-author-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .feedback-author-info span {
+            font-size: 14px;
+            color: var(--cinza-medio);
+        }
+
+        /* ─── CLIENTES ─── */
+        .clients {
+            background: #f7f7f7;
+            border-top: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4;
+            padding: 80px 0;
+            margin-bottom: 100px;
+            overflow: hidden;
+        }
+
+        .clients-marquee {
+            position: relative;
+            overflow: hidden;
+            margin-top: 48px;
+        }
+
+        .clients-marquee::before,
+        .clients-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: clamp(60px, 10vw, 160px);
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .clients-marquee::before {
+            left: 0;
+            background: linear-gradient(to right, #f7f7f7, transparent);
+        }
+
+        .clients-marquee::after {
+            right: 0;
+            background: linear-gradient(to left, #f7f7f7, transparent);
+        }
+
+        .clients-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: clientsMarquee 34s linear infinite;
+            padding: 8px 0 16px;
+        }
+
+        .clients-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes clientsMarquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .client-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 24px 28px 20px;
+            background: #fff;
+            border: 1px solid #e4e4e4;
+            border-radius: 12px;
+            width: 180px;
+            flex-shrink: 0;
+            transition: transform .2s, box-shadow .2s;
+            cursor: default;
+        }
+
+        .client-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+        }
+
+        .client-logo {
+            width: 90px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--azul-marca);
+        }
+
+        .client-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: grayscale(1);
+            opacity: .7;
+            transition: filter .2s, opacity .2s;
+        }
+
+        .client-card:hover .client-logo img {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .client-logo svg {
+            width: 48px;
+            height: 48px;
+            opacity: .5;
+        }
+
+        .client-name {
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--azul-noite);
+            line-height: 1.3;
+        }
+
+        /* ─── SOBRE ─── */
+        .sobre {
+            background: #fff;
+            padding-bottom: 0;
+        }
+
+        .sobre-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: clamp(20px, 4vw, 60px);
+            align-items: flex-end;
+            max-width: 1260px;
+            margin: 40px auto 0;
+            padding-bottom: 0;
+        }
+
+        .sobre-text {
+            padding-bottom: 10px;
+        }
+
+        .sobre-text p {
+            font-size: 18px;
+            color: var(--cinza-texto);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .link-blue {
+            color: #003c5b;
+            font-weight: 700;
+        }
+
+        .sobre-right {
+            width: clamp(160px, 22vw, 300px);
+            align-self: flex-end;
+            position: relative;
+            z-index: 2;
+            margin-bottom: -132px;
+        }
+
+        .sobre-photo {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .sobre-banner {
+            background: var(--azul-noite);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 0;
+            padding-inline: clamp(24px, 7vw, 160px);
+        }
+
+        .sobre-banner-inner {
+            display: grid;
+            grid-template-columns: 1fr clamp(160px, 22vw, 300px);
+            gap: clamp(20px, 4vw, 60px);
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 21px 0;
+            align-items: center;
+        }
+
+        .sobre-banner-left {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .sobre-social-block h4 {
+            color: #fff;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 14px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        /* nome e cargo no banner */
+        .sobre-name-block {
+            color: #fff;
+            text-align: right;
+            flex-shrink: 0;
+            margin-right: 25px;
+        }
+
+        .sobre-name-block h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .sobre-name-block p {
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* ─── CONTATO ─── */
+        .contato {
+            margin-bottom: 0;
+            padding: 0;
+            background:
+                linear-gradient(rgba(10, 20, 35, 0.72), rgba(10, 20, 35, 0.72)),
+                url('contato.png') center center / cover no-repeat;
+        }
+
+        .contato-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 180px clamp(24px, 7vw, 160px);
+        }
+
+        .contato .section-title {
+            color: #fff;
+        }
+
+        .contato .section-subtitle {
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .contato-btns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .contato-btn {
+            min-width: 220px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(90deg, var(--azul-noite) 0%, var(--azul-escuro) 100%);
+            color: #fff;
+            padding: 18px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background .2s, transform .15s;
+            box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.6);
+        }
+
+        .contato-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contato-btn svg {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--azul-noite);
+            padding: 40px clamp(24px, 7vw, 160px) 28px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 60px;
+            align-items: start;
+            padding-bottom: 28px;
+        }
+
+        .footer-logo-block {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto auto;
+            column-gap: 8px;
+            align-items: start;
+        }
+
+        .footer-logo-img {
+            grid-column: 1;
+            grid-row: 1 / 4;
+            width: 200px;
+            object-fit: contain;
+            align-self: start;
+        }
+
+        .footer-brand-text {
+            grid-column: 2;
+            grid-row: 1;
+            padding-top: 4px;
+        }
+
+        .footer-brand-text h3 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .footer-brand-text span {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-desc {
+            grid-column: 2;
+            grid-row: 2;
+            color: var(--cinza-medio);
+            font-size: 13.5px;
+            line-height: 1.7;
+            font-weight: 600;
+            max-width: 280px;
+            margin-top: 14px;
+        }
+
+        .footer-nav {
+            text-align: center;
+        }
+
+        .footer-nav h4 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px 40px;
+            justify-content: center;
+        }
+
+        .footer-nav-grid a {
+            color: #fff;
+            font-size: 16px;
+            text-align: left;
+            transition: color .2s;
+            font-weight: 500;
+        }
+
+        .footer-social-block {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding-top: 4px;
+        }
+
+        .footer-social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .footer-social-icon img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .footer-copy {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+
+            /* HERO */
+            .hero {
+                background: url('Vertical.png') center center / cover no-repeat;
+            }
+
+            /* NAV */
+            nav {
+                padding: 0 20px;
+                height: 110px;
+            }
+
+            .nav-links,
+            .btn-contato {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-nav {
+                top: 110px;
+            }
+
+            html {
+                scroll-padding-top: 70px;
+            }
+
+            /* HERO — imagem no topo, texto abaixo */
+            .hero {
+                padding: 0;
+            }
+
+            .hero-grid {
+                display: flex;
+                flex-direction: column;
+                padding: 20px 20px 0;
+            }
+
+            .hero-visual {
+                order: -1;
+                padding-top: 0;
+                justify-content: center;
+            }
+
+            .hero-visual img {
+                max-width: 260px;
+                margin: 0 auto;
+            }
+
+            .hero-content {
+                order: 1;
+                max-width: 100%;
+                text-align: center;
+                padding: 18px 0 28px;
+            }
+
+            .hero h1 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            /* PILLARS */
+            .pillars {
+                padding: 14px 20px;
+                gap: 4px;
+                justify-content: center;
+            }
+
+            .pillar-item {
+                padding: 4px 10px;
+                font-size: 13px;
+            }
+
+            /* SEÇÃO BASE */
+            section {
+                padding: 44px 20px;
+            }
+
+            .section-subtitle {
+                font-size: 15px;
+                margin-bottom: 32px;
+            }
+
+            /* CERT STRIP */
+            .cert-badge-strip {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .cert-badge-text {
+                align-items: center;
+            }
+
+            .cert-badge-title {
+                font-size: 16px;
+            }
+
+            .cert-divider {
+                display: none;
+            }
+
+            .cert-badge-desc {
+                font-size: 13px;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            /* SERVIÇOS */
+            .services {
+                max-width: 100%;
+                margin: 32px auto;
+                padding-bottom: 0;
+            }
+
+            .services-cols {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                max-width: 100%;
+                margin-bottom: 28px;
+            }
+
+            .service-col {
+                padding: 20px 16px 24px !important;
+            }
+
+            .service-col:first-child {
+                padding-right: 16px !important;
+            }
+
+            .service-col:last-child {
+                padding-left: 16px !important;
+            }
+
+            .service-icon {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 14px;
+            }
+
+            .service-col h3 {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+
+            .service-col p {
+                font-size: 14px;
+            }
+
+            /* TABS */
+            .tabs-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 8px;
+                padding: 12px 16px;
+                scrollbar-width: none;
+            }
+
+            .tabs-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-btn {
+                flex: 1;
+                white-space: nowrap;
+                font-size: 13px;
+                padding: 8px 6px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .tab-content.active {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-img-placeholder,
+            .tab-img-placeholder img {
+                min-height: 200px;
+            }
+
+            .tab-info {
+                padding: 24px 16px;
+            }
+
+            .tab-info h3 {
+                font-size: 18px;
+            }
+
+            /* BENEFÍCIOS */
+            .benefits {
+                margin-bottom: 44px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .benefit-card {
+                padding: 20px 20px 24px;
+                transition: transform .2s;
+            }
+
+            .benefit-card:hover {
+                transform: translateY(-3px);
+            }
+
+            .benefit-icon {
+                width: 32px;
+                height: 32px;
+                margin-bottom: 12px;
+            }
+
+            .benefit-card h3 {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+
+            .benefit-card p {
+                font-size: 14px;
+            }
+
+            /* ENTREGAS */
+            .deliveries {
+                margin-bottom: 44px;
+            }
+
+            .deliveries-slider-outer {
+                gap: 8px;
+            }
+
+            .deliveries-nav-btn {
+                width: 34px;
+                height: 34px;
+            }
+
+            .deliveries-nav-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .deliveries-grid {
+                overflow-x: auto;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .delivery-col-lateral {
+                min-width: 80px;
+                gap: 10px;
+            }
+
+            .delivery-col-central {
+                min-width: 120px;
+                min-height: unset;
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .delivery-ph {
+                flex: none;
+                aspect-ratio: 4 / 3;
+                min-height: unset;
+                width: 100%;
+            }
+
+            #panorama-entregas {
+                flex: 1;
+                height: 100%;
+            }
+
+            /* FEEDBACKS */
+            .feedbacks {
+                margin-bottom: 44px;
+            }
+
+            .feedbacks-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-padding-inline: 10%;
+                -webkit-overflow-scrolling: touch;
+                gap: 16px;
+                padding: 0 10% 14px;
+                max-width: 100%;
+            }
+
+            .feedbacks-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .feedbacks-grid::-webkit-scrollbar-thumb {
+                background: var(--azul-marca);
+                border-radius: 2px;
+            }
+
+            .feedback-card {
+                flex: 0 0 80%;
+                scroll-snap-align: center;
+            }
+
+            /* CLIENTES */
+            .clients {
+                margin-bottom: 44px;
+                padding: 44px 0;
+            }
+
+            .client-card {
+                width: 148px;
+                padding: 18px 20px 16px;
+            }
+
+            /* SOBRE */
+            .sobre-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                margin-top: 20px;
+            }
+
+            .sobre-text p {
+                font-size: 15px;
+            }
+
+            .sobre-right {
+                width: 100%;
+                margin-bottom: 0;
+                align-self: auto;
+                display: flex;
+                justify-content: center;
+            }
+
+            .sobre-photo {
+                width: 75%;
+                max-width: 300px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            /* SOBRE BANNER */
+            .sobre-banner {
+                margin-bottom: 0;
+            }
+
+            .sobre-banner-inner {
+                grid-template-columns: 1fr;
+                padding: 28px 20px;
+            }
+
+            .sobre-banner-left {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .sobre-social-block {
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .sobre-name-block {
+                text-align: center;
+            }
+
+            /* CONTATO — botões à esquerda, imagem à direita */
+            .contato-btns {
+                flex-direction: column;
+                width: 100%;
+                max-width: 340px;
+            }
+
+            .contato-btn {
+                justify-content: center;
+                font-size: 14px;
+                padding: 14px 16px;
+            }
+
+            /* FOOTER */
+            .footer-inner {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    "logo   logo"
+                    "nav    social";
+                gap: 48px 16px;
+            }
+
+            .footer-logo-block {
+                grid-area: logo;
+            }
+
+            .footer-logo-img {
+                width: 120px;
+            }
+
+            .footer-nav {
+                grid-area: nav;
+                text-align: center;
+            }
+
+            .footer-nav h4 {
+                margin-bottom: 20px;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: auto auto;
+                gap: 14px 28px;
+                justify-content: center;
+            }
+
+            .footer-social-block {
+                grid-area: social;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-end;
+                padding-top: 0;
+            }
+
+            footer {
+                padding: 48px 24px 32px;
+            }
+
+            .footer-copy {
+                margin-top: 32px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .delivery-col-lateral {
+                flex-direction: column;
+            }
+
+            .hero-visual img {
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">
+            <img src="logo.svg" alt="Parametriza BIM" style="width:125px;height:100px;object-fit:contain;">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#beneficios">Benefícios</a></li>
+            <li><a href="#entregas">Entregas</a></li>
+            <li><a href="#feedbacks">Feedbacks</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+        </ul>
+
+        <a href="#contato" class="btn-contato">Contate nos</a>
+
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#servicos" onclick="closeMenu()">Serviços</a>
+        <a href="#beneficios" onclick="closeMenu()">Benefícios</a>
+        <a href="#entregas" onclick="closeMenu()">Entregas</a>
+        <a href="#feedbacks" onclick="closeMenu()">Feedbacks</a>
+        <a href="#clientes" onclick="closeMenu()">Clientes</a>
+        <a href="#sobre" onclick="closeMenu()">Sobre</a>
+        <a href="#contato" onclick="closeMenu()">Contato</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Parametriza BIM: transforme o BIM com estratégia e performance para o seu negócio.</h1>
+                <p>Capacitamos sua equipe, estruturamos sua infraestrutura e provisionamos as ferramentas certas para
+                    que o BIM atue como verdadeiro habilitador da sua operação.</p>
+            </div>
+
+            <div class="hero-visual">
+                <img src="Prédio.png" alt="BIM 3D" style="width:100%;max-width:580px;">
+            </div>
+        </div>
+
+        <div class="pillars">
+            <div class="pillar-item">Implantação BIM</div>
+            <span class="pillar-dot"></span>
+            <div class="pillar-item">Automação</div>
+            <span class="pillar-dot"></span>
+            <div class="pillar-item">Padronização</div>
+            <span class="pillar-dot"></span>
+            <div class="pillar-item">Revit &amp; IFC</div>
+        </div>
+    </section>
+
+    <!-- CERT -->
+    <div class="cert-strip">
+        <div class="cert-strip-inner">
+            <div class="cert-badge-strip">
+                <img src="autodesk.png" alt="Autodesk" class="cert-icon">
+                <div class="cert-badge-text">
+                    <span class="cert-badge-title" style="text-align:center;">Autodesk Developer Membership</span>
+                </div>
+                <div class="cert-divider"></div>
+                <p class="cert-badge-desc">Reconhecendo expertise técnica no desenvolvimento de soluções BIM integradas
+                    à plataforma.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="services">
+        <h2 class="section-title">Serviços</h2>
+
+        <p class="section-subtitle">Soluções completas para implantação BIM, automação e estruturação de processos<br>em
+            engenharia estrutural e pré-fabricados.</p>
+
+        <div class="services-cols">
+            <div class="service-col">
+                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="18" rx="2" />
+                    <path d="M8 3v18M16 3v18M2 8h6M2 13h6M2 18h6M16 8h6M16 13h6M16 18h6" />
+                </svg>
+                <h3>Escritórios de Engenharia</h3>
+                <p>Estruturamos e automatizamos processos BIM para escritórios de engenharia, elevando produtividade,
+                    padronização e maturidade técnica.</p>
+            </div>
+
+            <div class="service-col">
+                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                    <path d="M2 12h20" />
+                </svg>
+                <h3>Empresas Pré-Fabricados</h3>
+                <p>Implementamos BIM integrado à produção de pré-fabricados, com padronização, automação e precisão nos
+                    quantitativos e detalhamentos.</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="services-tabs">
+            <div class="tabs-bar">
+                <button class="tab-btn" onclick="switchTab(0)">Estratégia</button>
+                <button class="tab-btn active" onclick="switchTab(1)">Estrutura</button>
+                <button class="tab-btn" onclick="switchTab(2)">Inteligência</button>
+                <button class="tab-btn" onclick="switchTab(3)">Performance</button>
+            </div>
+
+            <div class="tab-content" id="tab-0">
+                <div class="tab-img-placeholder"><img src="estrategia.png" alt="Estratégia BIM"></div>
+                <div class="tab-info">
+                    <h3>Estratégia BIM</h3>
+                    <p>Diagnóstico e planejamento para elevar a maturidade BIM.</p>
+                    <ul class="tab-list">
+                        <li>Diagnóstico de maturidade BIM</li>
+                        <li>Plano de implementação personalizado</li>
+                        <li>Definição de objetivos e KPIs</li>
+                        <li>Alinhamento com gestão e equipes</li>
+                        <li>Roadmap de evolução BIM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content active" id="tab-1">
+                <div class="tab-img-placeholder"><img src="estrutura.png" alt="Estrutura Técnica"></div>
+                <div class="tab-info">
+                    <h3>Estrutura Técnica</h3>
+                    <p>Criação de um ambiente BIM consistente, organizado e escalável.</p>
+                    <ul class="tab-list">
+                        <li>Templates Revit</li>
+                        <li>Padrões gráficos e regras de modelagem</li>
+                        <li>Estrutura de pastas e parâmetros</li>
+                        <li>Convenções de nomenclatura</li>
+                        <li>Governança e documentação BIM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-2">
+                <div class="tab-img-placeholder"><img src="inteligencia.png" alt="Automação e Inteligência BIM"></div>
+                <div class="tab-info">
+                    <h3>Automação e Inteligência BIM</h3>
+                    <p>Dynamo e Python para eliminar trabalho repetitivo.</p>
+                    <ul class="tab-list">
+                        <li>Scripts Dynamo para Revit</li>
+                        <li>Automação com Python</li>
+                        <li>Geração automática de quantitativos</li>
+                        <li>Integração com outras plataformas</li>
+                        <li>Famílias paramétricas avançadas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-3">
+                <div class="tab-img-placeholder"><img src="performance.png" alt="Performance e Resultados"></div>
+                <div class="tab-info">
+                    <h3>Performance e Resultados</h3>
+                    <p>Acompanhamento contínuo para resultados sustentáveis.</p>
+                    <ul class="tab-list">
+                        <li>Análise e monitoramento de KPIs</li>
+                        <li>Treinamentos e capacitações</li>
+                        <li>Suporte técnico especializado</li>
+                        <li>Revisão e otimização de processos</li>
+                        <li>Evolução constante do ambiente BIM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="beneficios" class="benefits">
+        <h2 class="section-title">Diferenciais e Benefícios</h2>
+        <p class="section-subtitle">Resultados mensuráveis que transformam a operação de escritórios de engenharia.</p>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="4" />
+                    <path
+                        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                </svg>
+                <h3>Evolução e Maturidade BIM</h3>
+                <p>Estruturamos a capacidade técnica da sua equipe com padronização, templates consistentes e fluxos
+                    definidos, elevando o nível de maturidade BIM da organização.</p>
+            </div>
+
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                    <polyline points="22 20 2 20" />
+                </svg>
+                <h3>Eficiência e Produtividade</h3>
+                <p>Automatizamos tarefas repetitivas, reduzimos retrabalho e organizamos processos para liberar tempo
+                    técnico e aumentar a performance dos projetos.</p>
+            </div>
+
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <polyline points="9 12 11 14 15 10" />
+                </svg>
+                <h3>Controle e Previsibilidade</h3>
+                <p>Garantimos quantitativos precisos e maior previsibilidade de custos desde as fases iniciais do
+                    projeto.</p>
+            </div>
+
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    <line x1="8" y1="10" x2="16" y2="10" />
+                    <line x1="8" y1="14" x2="13" y2="14" />
+                </svg>
+                <h3>Suporte e Evolução Contínua</h3>
+                <p>Oferecemos acompanhamento técnico especializado para garantir aplicação correta, evolução constante e
+                    resultados sustentáveis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTREGAS -->
+    <section id="entregas" class="deliveries">
+        <h2 class="section-title">Entregas</h2>
+        <p class="section-subtitle">Acompanhe algumas das entregas que marcaram nossa trajetória ao longo dos anos.</p>
+
+        <div class="deliveries-slider-outer">
+            <button class="deliveries-nav-btn" id="deliveriesPrev" onclick="slideDeliveries(-1)" aria-label="Anterior"
+                disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+
+            <div class="deliveries-slider-track">
+                <div class="deliveries-slider-inner" id="deliveriesSlider">
+
+                    <!-- Aba 1 -->
+                    <div class="deliveries-page">
+                        <div class="deliveries-grid">
+                            <div class="delivery-col-lateral">
+                                <div class="delivery-ph">entrega-1.jpg</div>
+                                <div class="delivery-ph">entrega-2.jpg</div>
+                            </div>
+                            <div class="delivery-col-central">
+                                <iframe id="panorama-entregas"
+                                    src="https://pano.autodesk.com/pano.html?url=jpgs/c5a785f8-ebff-4243-b6d8-cd8185fc7599&version=2"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="delivery-col-lateral">
+                                <div class="delivery-ph">entrega-3.jpg</div>
+                                <div class="delivery-ph">entrega-4.jpg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aba 2 -->
+                    <div class="deliveries-page">
+                        <div class="deliveries-grid">
+                            <div class="delivery-col-lateral">
+                                <div class="delivery-ph">entrega-5.jpg</div>
+                                <div class="delivery-ph">entrega-6.jpg</div>
+                            </div>
+                            <div class="delivery-col-central">
+                                <div class="delivery-ph" style="flex:1;aspect-ratio:unset;">entrega-panorama-2</div>
+                            </div>
+                            <div class="delivery-col-lateral">
+                                <div class="delivery-ph">entrega-7.jpg</div>
+                                <div class="delivery-ph">entrega-8.jpg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="deliveries-nav-btn" id="deliveriesNext" onclick="slideDeliveries(1)" aria-label="Próximo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- FEEDBACKS -->
+    <section id="feedbacks" class="feedbacks">
+        <h2 class="section-title">Feedbacks</h2>
+        <p class="section-subtitle">A confiança dos nossos clientes traduzida em experiências e resultados concretos.
+        </p>
+
+        <div class="feedbacks-grid">
+            <div class="feedback-card">
+                <h3>"Lorem Ipsum Dolor"</h3>
+                <div class="feedback-divider"></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
+                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
+                    magna.</p>
+                <div class="feedback-author">
+                    <div class="feedback-avatar">foto</div>
+                    <div class="feedback-author-info">
+                        <h4>João da Silva</h4>
+                        <span>Diretor de Engenharia</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-card">
+                <h3>"Lorem Ipsum Dolor"</h3>
+                <div class="feedback-divider"></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
+                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
+                    magna.</p>
+                <div class="feedback-author">
+                    <div class="feedback-avatar">foto</div>
+                    <div class="feedback-author-info">
+                        <h4>João da Silva</h4>
+                        <span>Diretor de Engenharia</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-card">
+                <h3>"Lorem Ipsum Dolor"</h3>
+                <div class="feedback-divider"></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
+                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
+                    magna.</p>
+                <div class="feedback-author">
+                    <div class="feedback-avatar">foto</div>
+                    <div class="feedback-author-info">
+                        <h4>João da Silva</h4>
+                        <span>Diretor de Engenharia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section id="clientes" class="clients">
+        <h2 class="section-title">Clientes</h2>
+        <p class="section-subtitle">Empresas que confiam na Parametriza BIM para estruturar seus processos
+            BIM.<br>Clique no logo para conhecer as obras concluídas — do modelo ao prédio construido.</p>
+
+        <div class="clients-marquee">
+            <div class="clients-track" id="clientsTrack">
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <!-- Duplicata para loop contínuo sem JS -->
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+                <div class="client-card" aria-hidden="true">
+                    <div class="client-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="1" />
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                    </div>
+                    <span class="client-name">Nome do Cliente</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="sobre">
+        <h2 class="section-title">Sobre</h2>
+
+        <div class="sobre-inner">
+            <div class="sobre-text">
+                <p>A <span class="link-blue">Parametriza BIM</span> é uma empresa especializada em implantação BIM,
+                    parametrização e automação de processos para engenharia é liderada por <span
+                        class="link-blue">Danilo Barbosa</span>, Engenheiro Civil com especialização em BIM.</p>
+                <p>Atuamos na estruturação, padronização e otimização de fluxos de trabalho, desenvolvendo templates,
+                    bibliotecas paramétricas e automações com Dynamo e Python, com foco em aumentar produtividade,
+                    reduzir retrabalho e elevar a maturidade BIM das organizações.</p>
+                <p>Somos <span class="link-blue">parceiros estratégicos</span> de escritórios de engenharia estrutural e
+                    empresas de pré-fabricados em concreto, apoiando desde a implantação inicial até a consolidação de
+                    processos avançados e escaláveis.</p>
+            </div>
+
+            <div class="sobre-right">
+                <img src="imagem-danilo.png" alt="Danilo Barbosa" class="sobre-photo">
+            </div>
+        </div>
+    </section>
+
+    <div class="sobre-banner">
+        <div class="sobre-banner-inner">
+            <div class="sobre-banner-left">
+                <div class="sobre-social-block">
+                    <h4>Conheça as nossas Redes Sociais</h4>
+                    <div class="social-icons">
+                        <a href="https://br.linkedin.com/company/parametrizabim" class="social-icon"
+                            aria-label="LinkedIn" target="_blank" rel="noopener">
+                            <img src="linkedin.svg" alt="linkedin">
+                        </a>
+                        <a href="https://www.youtube.com/@parametrizabim" class="social-icon" aria-label="YouTube"
+                            target="_blank" rel="noopener">
+                            <img src="youtube.svg" alt="youtube">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sobre-name-block">
+                    <h3>Danilo Barbosa</h3>
+                    <p>Engenheiro Civil</p>
+                    <p>Especialista em BIM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contato">
+        <div class="contato-inner">
+            <h2 class="section-title">Contato</h2>
+
+            <p class="section-subtitle" style="margin-bottom:40px;">Vamos conversar sobre como evoluir e otimizar seus
+                processos BIM com estratégia e eficiência.</p>
+
+            <div class="contato-btns">
+                <a href="mailto:contato@parametrizabim.com.br" class="contato-btn">
+                    <img src="email.svg" alt="email" width="32px" height="32px">
+                    Via E-mail
+                </a>
+                <a href="https://wa.me/55" class="contato-btn">
+                    <img src="whatsapp.svg" alt="whatsapp" width="32px" height="32px">
+                    Via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-block">
+                <img src="logo.svg" alt="Parametriza BIM" class="footer-logo-img">
+                <div class="footer-brand-text">
+                    <h3>Parametriza BIM</h3>
+                    <span>Engenharia de Precisão</span>
+                </div>
+                <p class="footer-desc">Estruturação, padronização e automação de processos para engenharia.
+                    Transformando a maturidade BIM de escritórios de engenharia estrutural e pré-fabricados.</p>
+            </div>
+
+            <div class="footer-nav">
+                <h4>Navegação</h4>
+                <div class="footer-nav-grid">
+                    <a href="#servicos">Serviços</a>
+                    <a href="#beneficios">Benefícios</a>
+                    <a href="#entregas">Entregas</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#feedbacks">Feedbacks</a>
+                    <a href="#clientes">Clientes</a>
+                    <a href="#contato">Contate Nos</a>
+                </div>
+            </div>
+
+            <div class="footer-social-block">
+                <a href="https://www.youtube.com/@parametrizabim" class="footer-social-icon" aria-label="YouTube"
+                    target="_blank" rel="noopener">
+                    <img src="youtube.svg" alt="YouTube">
+                </a>
+                <a href="https://br.linkedin.com/company/parametrizabim" class="footer-social-icon"
+                    aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <img src="linkedin.svg" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+
+        <p class="footer-copy">© 2019 Parametriza BIM. Todos os Direitos Reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
+        function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
+
+        function switchTab(i) {
+            document.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', i === j));
+            document.querySelectorAll('.tab-content').forEach((c, j) => c.classList.toggle('active', i === j));
+        }
+
+        var deliveriesPage = 0;
+        function slideDeliveries(dir) {
+            var pages = document.querySelectorAll('.deliveries-page');
+            var total = pages.length;
+            deliveriesPage = Math.max(0, Math.min(total - 1, deliveriesPage + dir));
+            document.getElementById('deliveriesSlider').style.transform = 'translateX(-' + (deliveriesPage * 100) + '%)';
+            document.getElementById('deliveriesPrev').disabled = deliveriesPage === 0;
+            document.getElementById('deliveriesNext').disabled = deliveriesPage === total - 1;
+        }
+
+        (function () {
+            var nav = document.querySelector('nav');
+            function updateNav() {
+                if (window.scrollY > 10) {
+                    nav.style.background = '#031638';
+                } else {
+                    nav.style.background = 'transparent';
+                }
+            }
+            window.addEventListener('scroll', updateNav, { passive: true });
+            updateNav();
+        })();
+
+        window.addEventListener('load', function () {
+            if (window.innerWidth <= 960) {
+                var grid = document.querySelector('.feedbacks-grid');
+                var firstCard = grid && grid.querySelector('.feedback-card');
+                if (grid && firstCard) {
+                    var paddingLeft = parseFloat(getComputedStyle(grid).paddingLeft);
+                    var cardWidth = firstCard.offsetWidth;
+                    var gap = 16;
+
+                    var card2Center = paddingLeft + cardWidth + gap + cardWidth / 2;
+                    grid.scrollLeft = card2Center - grid.offsetWidth / 2;
+                }
+            }
+        });
+    </script>
+
+    <!DOCTYPE html>
+    <html>
+
+    <body>
+        <script type="text/javascript" src="https://res.public.onecdn.static.microsoft/customerconnect/v1/7dttl/init.js"
+            id="chatbot" environmentId="6d1e1e51-b6f8-e8b6-b711-41e0c94f54e1" crossorigin="anonymous"></script>
+    </body>
+
+    </html>
+</body>
+
+</html>

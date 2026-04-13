@@ -503,7 +503,7 @@
         .benefit-card p {
             font-size: 16px;
             color: var(--cinza-texto);
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.65;
         }
 
@@ -1087,6 +1087,33 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 960px) {
 
+            /* TIPOGRAFIA GLOBAL MOBILE */
+            .section-title        { font-size: 17px; }
+            .section-subtitle     { font-size: 12px; margin-bottom: 20px; }
+            .tab-info h3          { font-size: 11px; }
+            .tab-info > p         { font-size: 13px; }
+            .tab-list li          { font-size: 13px; }
+            .benefit-card h3      { font-size: 10px; margin-bottom: 6px; }
+            .benefit-card p       { font-size: 9px; }
+            .feedback-card h3     { font-size: 13px; }
+            .feedback-card p      { font-size: 11px; }
+            .feedback-author-info h4  { font-size: 12px; }
+            .feedback-author-info span{ font-size: 11px; }
+            .sobre-text p         { font-size: 12px; }
+            .sobre-social-block h4{ font-size: 13px; }
+            .sobre-name-block h3  { font-size: 14px; }
+            .sobre-name-block p   { font-size: 12px; }
+            .service-col h3       { font-size: 10px; }
+            .service-col p        { font-size: 9px; }
+            .client-name          { font-size: 10px; }
+            .footer-brand-text h3 { font-size: 14px; }
+            .footer-desc          { font-size: 11px; }
+            .footer-nav h4        { font-size: 13px; }
+            .footer-nav-grid a    { font-size: 12px; }
+            .footer-copy          { font-size: 12px; }
+            .cert-badge-title     { font-size: 13px; }
+            .cert-badge-desc      { font-size: 11px; }
+
             /* HERO */
             .hero {
                 background: url('Vertical.png') center center / cover no-repeat;
@@ -1117,7 +1144,7 @@
 
             /* HERO — imagem no topo, texto abaixo */
             .hero {
-                padding: 0;
+                padding-top: 110px;
             }
 
             .hero-grid {
@@ -1234,12 +1261,12 @@
             }
 
             .service-col h3 {
-                font-size: 15px;
+                font-size: 13px;
                 margin-bottom: 10px;
             }
 
             .service-col p {
-                font-size: 14px;
+                font-size: 12px;
             }
 
             /* TABS */
@@ -1259,8 +1286,8 @@
             .tab-btn {
                 flex: 1;
                 white-space: nowrap;
-                font-size: 13px;
-                padding: 8px 6px;
+                font-size: 11px;
+                padding: 8px 4px;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -1310,12 +1337,12 @@
             }
 
             .benefit-card h3 {
-                font-size: 16px;
+                font-size: 14px;
                 margin-bottom: 8px;
             }
 
             .benefit-card p {
-                font-size: 14px;
+                font-size: 12px;
             }
 
             /* ENTREGAS */
@@ -1324,48 +1351,52 @@
             }
 
             .deliveries-slider-outer {
-                gap: 8px;
+                gap: 4px;
             }
 
             .deliveries-nav-btn {
-                width: 34px;
-                height: 34px;
+                width: 22px;
+                height: 22px;
             }
 
             .deliveries-nav-btn svg {
-                width: 16px;
-                height: 16px;
+                width: 11px;
+                height: 11px;
             }
 
             .deliveries-grid {
-                overflow-x: auto;
-                gap: 10px;
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                gap: 8px;
                 align-items: stretch;
+                min-height: 52vw;
             }
 
-            .delivery-col-lateral {
-                min-width: 80px;
-                gap: 10px;
-            }
-
+            .delivery-col-lateral,
             .delivery-col-central {
-                min-width: 120px;
-                min-height: unset;
-                flex: 2;
                 display: flex;
                 flex-direction: column;
+                align-items: stretch;
+                min-width: 0;
+                height: 100%;
+            }
+
+            .delivery-col-lateral .delivery-ph:nth-child(2) {
+                display: none;
             }
 
             .delivery-ph {
-                flex: none;
-                aspect-ratio: 4 / 3;
-                min-height: unset;
+                aspect-ratio: unset;
+                min-height: 0;
                 width: 100%;
+                flex: 1;
             }
 
             #panorama-entregas {
-                flex: 1;
+                width: 100%;
                 height: 100%;
+                flex: 1;
+                aspect-ratio: unset;
             }
 
             /* FEEDBACKS */
@@ -1382,15 +1413,11 @@
                 gap: 16px;
                 padding: 0 10% 14px;
                 max-width: 100%;
+                scrollbar-width: none;
             }
 
             .feedbacks-grid::-webkit-scrollbar {
-                height: 4px;
-            }
-
-            .feedbacks-grid::-webkit-scrollbar-thumb {
-                background: var(--azul-marca);
-                border-radius: 2px;
+                display: none;
             }
 
             .feedback-card {
@@ -1401,7 +1428,7 @@
             /* CLIENTES */
             .clients {
                 margin-bottom: 44px;
-                padding: 44px 0;
+                padding: 44px 20px;
             }
 
             .client-card {
@@ -1892,7 +1919,7 @@
     <section id="clientes" class="clients">
         <h2 class="section-title">Clientes</h2>
         <p class="section-subtitle">Empresas que confiam na Parametriza BIM para estruturar seus processos
-            BIM.<br>Clique no logo para conhecer as obras concluídas — do modelo ao prédio construido.</p>
+            BIM.Clique no logo para conhecer as obras concluídas — do modelo ao prédio construido.</p>
 
         <div class="clients-marquee">
             <div class="clients-track" id="clientsTrack">

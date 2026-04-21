@@ -607,6 +607,11 @@
             text-align: center;
         }
 
+        img.delivery-ph {
+            object-fit: cover;
+            display: block;
+        }
+
         /* ─── FEEDBACKS ─── */
         .feedbacks {
             background: #fff;
@@ -1668,7 +1673,7 @@
         <ul class="nav-links">
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="#beneficios">Benefícios</a></li>
-            <li><a href="#entregas">Entregas</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
             <li><a href="#feedbacks">Feedbacks</a></li>
             <li><a href="#clientes">Clientes</a></li>
             <li><a href="#sobre">Sobre</a></li>
@@ -1684,7 +1689,7 @@
     <div class="mobile-nav" id="mobileNav">
         <a href="#servicos" onclick="closeMenu()">Serviços</a>
         <a href="#beneficios" onclick="closeMenu()">Benefícios</a>
-        <a href="#entregas" onclick="closeMenu()">Entregas</a>
+        <a href="#portfolio" onclick="closeMenu()">Portfólio</a>
         <a href="#feedbacks" onclick="closeMenu()">Feedbacks</a>
         <a href="#clientes" onclick="closeMenu()">Clientes</a>
         <a href="#sobre" onclick="closeMenu()">Sobre</a>
@@ -1695,9 +1700,9 @@
     <section class="hero">
         <div class="hero-grid">
             <div class="hero-content">
-                <h1>Parametriza BIM: transforme o BIM com estratégia e performance para o seu negócio.</h1>
-                <p>Capacitamos sua equipe, estruturamos sua infraestrutura e provisionamos as ferramentas certas para
-                    que o BIM atue como verdadeiro habilitador da sua operação.</p>
+                <h1>Transforme o BIM com estratégia e performance para o seu negócio.</h1>
+                <p>Soluções para implantação BIM, automação e estruturação de processos em engenharia estrutural e
+                    pré-fabricados em concreto.</p>
             </div>
 
             <div class="hero-visual">
@@ -1712,7 +1717,9 @@
             <span class="pillar-dot"></span>
             <div class="pillar-item">Padronização</div>
             <span class="pillar-dot"></span>
-            <div class="pillar-item">Revit &amp; IFC</div>
+            <div class="pillar-item">Revit</div>
+            <span class="pillar-dot"></span>
+            <div class="pillar-item">IFC</div>
         </div>
     </section>
 
@@ -1735,8 +1742,8 @@
     <section id="servicos" class="services">
         <h2 class="section-title">Serviços</h2>
 
-        <p class="section-subtitle">Soluções completas para implantação BIM, automação e estruturação de processos<br>em
-            engenharia estrutural e pré-fabricados.</p>
+        <p class="section-subtitle">Implantação BIM, automação e estruturação de processos para projetos estruturais de
+            concreto, alvenaria estrutural e pré-fabricados de concreto.</p>
 
         <div class="services-cols">
             <div class="service-col">
@@ -1745,9 +1752,9 @@
                     <rect x="2" y="3" width="20" height="18" rx="2" />
                     <path d="M8 3v18M16 3v18M2 8h6M2 13h6M2 18h6M16 8h6M16 13h6M16 18h6" />
                 </svg>
-                <h3>Escritórios de Engenharia</h3>
-                <p>Estruturamos e automatizamos processos BIM para escritórios de engenharia, elevando produtividade,
-                    padronização e maturidade técnica.</p>
+                <h3>Escritórios de Engenharia Estrutural</h3>
+                <p>Estruturamos e implementamos plugins e padronizações que elevam a produtividade, maturidade técnica e
+                    precisão nos processos de projeto. </p>
             </div>
 
             <div class="service-col">
@@ -1757,9 +1764,9 @@
                     <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
                     <path d="M2 12h20" />
                 </svg>
-                <h3>Empresas Pré-Fabricados</h3>
-                <p>Implementamos BIM integrado à produção de pré-fabricados, com padronização, automação e precisão nos
-                    quantitativos e detalhamentos.</p>
+                <h3>Empresas de pré-fabricado de concreto</h3>
+                <p>Implementamos BIM integrado à produção das peças pré-fabricadas de concreto, trazendo padronização,
+                    precisão e eficiência nos processos de projeto.</p>
             </div>
         </div>
 
@@ -1775,8 +1782,8 @@
             <div class="tab-content" id="tab-0">
                 <div class="tab-img-placeholder"><img src="estrategia.png" alt="Estratégia BIM"></div>
                 <div class="tab-info">
-                    <h3>Estratégia BIM</h3>
-                    <p>Diagnóstico e planejamento para elevar a maturidade BIM.</p>
+                    <h3>Estratégia</h3>
+                    <p>Implantação BIM com objetivos, prioridades, governança e plano de ação.</p>
                     <ul class="tab-list">
                         <li>Diagnóstico de maturidade BIM</li>
                         <li>Plano de implementação personalizado</li>
@@ -1790,8 +1797,8 @@
             <div class="tab-content active" id="tab-1">
                 <div class="tab-img-placeholder"><img src="estrutura.png" alt="Estrutura Técnica"></div>
                 <div class="tab-info">
-                    <h3>Estrutura Técnica</h3>
-                    <p>Criação de um ambiente BIM consistente, organizado e escalável.</p>
+                    <h3>Estrutura</h3>
+                    <p>Base consistente com padrões, bibliotecas, parâmetros e documentação técnica.</p>
                     <ul class="tab-list">
                         <li>Templates Revit</li>
                         <li>Padrões gráficos e regras de modelagem</li>
@@ -1805,8 +1812,8 @@
             <div class="tab-content" id="tab-2">
                 <div class="tab-img-placeholder"><img src="inteligencia.png" alt="Automação e Inteligência BIM"></div>
                 <div class="tab-info">
-                    <h3>Automação e Inteligência BIM</h3>
-                    <p>Dynamo e Python para eliminar trabalho repetitivo.</p>
+                    <h3>Inteligência</h3>
+                    <p>Estruturação de dados, automações e validações para apoiar decisões e integrar processos.</p>
                     <ul class="tab-list">
                         <li>Scripts Dynamo para Revit</li>
                         <li>Automação com Python</li>
@@ -1820,8 +1827,8 @@
             <div class="tab-content" id="tab-3">
                 <div class="tab-img-placeholder"><img src="performance.png" alt="Performance e Resultados"></div>
                 <div class="tab-info">
-                    <h3>Performance e Resultados</h3>
-                    <p>Acompanhamento contínuo para resultados sustentáveis.</p>
+                    <h3>Performance</h3>
+                    <p>Operação com produtividade, controle, qualidade e padronização.</p>
                     <ul class="tab-list">
                         <li>Análise e monitoramento de KPIs</li>
                         <li>Treinamentos e capacitações</li>
@@ -1837,7 +1844,7 @@
     <!-- BENEFÍCIOS -->
     <section id="beneficios" class="benefits">
         <h2 class="section-title">Diferenciais e Benefícios</h2>
-        <p class="section-subtitle">Resultados mensuráveis que transformam a operação de escritórios de engenharia.</p>
+        <p class="section-subtitle">Resultados mensuráveis que elevam a sua competitividade no mercado</p>
 
         <div class="benefits-grid">
             <div class="benefit-card">
@@ -1847,8 +1854,9 @@
                         d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
                 </svg>
                 <h3>Evolução e Maturidade BIM</h3>
-                <p>Estruturamos a capacidade técnica da sua equipe com padronização, templates consistentes e fluxos
-                    definidos, elevando o nível de maturidade BIM da organização.</p>
+                <p>Evolua o nível de maturidade BIM da sua empresa com padronização, templates consistentes e fluxos
+                    definidos para projetos estruturais, garantindo mais consistência, qualidade técnica e eficiência
+                    nas entregas. </p>
             </div>
 
             <div class="benefit-card">
@@ -1859,8 +1867,8 @@
                     <polyline points="22 20 2 20" />
                 </svg>
                 <h3>Eficiência e Produtividade</h3>
-                <p>Automatizamos tarefas repetitivas, reduzimos retrabalho e organizamos processos para liberar tempo
-                    técnico e aumentar a performance dos projetos.</p>
+                <p>Aumente a performance dos projetos estruturais com automação de tarefas repetitivas e organização de
+                    processos, reduzindo retrabalhos e liberando mais tempo para o desenvolvimento técnico. </p>
             </div>
 
             <div class="benefit-card">
@@ -1869,8 +1877,8 @@
                     <polyline points="9 12 11 14 15 10" />
                 </svg>
                 <h3>Controle e Previsibilidade</h3>
-                <p>Garantimos quantitativos precisos e maior previsibilidade de custos desde as fases iniciais do
-                    projeto.</p>
+                <p>Garantimos maior controle e previsibilidade do projeto estrutural por meio de quantitativos
+                    confiáveis, planejamento de custos e redução de erros humanos.</p>
             </div>
 
             <div class="benefit-card">
@@ -1880,16 +1888,17 @@
                     <line x1="8" y1="14" x2="13" y2="14" />
                 </svg>
                 <h3>Suporte e Evolução Contínua</h3>
-                <p>Oferecemos acompanhamento técnico especializado para garantir aplicação correta, evolução constante e
-                    resultados sustentáveis.</p>
+                <p>Oferecemos suporte técnico contínuo para garantir a evolução do BIM na sua empresa, com melhoria
+                    constante dos processos, acompanhamento da aplicação e práticas sustentáveis nos projetos
+                    estruturais.</p>
             </div>
         </div>
     </section>
 
     <!-- ENTREGAS -->
     <section id="entregas" class="deliveries">
-        <h2 class="section-title">Entregas</h2>
-        <p class="section-subtitle">Acompanhe algumas das entregas que marcaram nossa trajetória ao longo dos anos.</p>
+        <h2 class="section-title">Portfólio</h2>
+        <p class="section-subtitle">Conheça as entregas que marcaram a nossa trajetória ao longo dos anos.</p>
 
         <div class="deliveries-slider-outer">
             <button class="deliveries-nav-btn" id="deliveriesPrev" onclick="slideDeliveries(-1)" aria-label="Anterior"
@@ -1907,8 +1916,8 @@
                     <div class="deliveries-page">
                         <div class="deliveries-grid">
                             <div class="delivery-col-lateral">
-                                <div class="delivery-ph">entrega-1.jpg</div>
-                                <div class="delivery-ph">entrega-2.jpg</div>
+                                <img class="delivery-ph" src="entrega_1.png" alt="Entrega 1">
+                                <img class="delivery-ph" src="entrega_2.png" alt="Entrega 2">
                             </div>
                             <div class="delivery-col-central">
                                 <iframe id="panorama-entregas"
@@ -1917,8 +1926,8 @@
                                 </iframe>
                             </div>
                             <div class="delivery-col-lateral">
-                                <div class="delivery-ph">entrega-3.jpg</div>
-                                <div class="delivery-ph">entrega-4.jpg</div>
+                                <img class="delivery-ph" src="entrega_3.png" alt="Entrega 3">
+                                <img class="delivery-ph" src="entrega_4.png" alt="Entrega 4">
                             </div>
                         </div>
                     </div>
@@ -1927,15 +1936,15 @@
                     <div class="deliveries-page">
                         <div class="deliveries-grid">
                             <div class="delivery-col-lateral">
-                                <div class="delivery-ph">entrega-5.jpg</div>
-                                <div class="delivery-ph">entrega-6.jpg</div>
+                                <img class="delivery-ph" src="entrega_5.png" alt="Entrega 5">
+                                <img class="delivery-ph" src="entrega_6.png" alt="Entrega 6">
                             </div>
                             <div class="delivery-col-central">
                                 <div class="delivery-ph" style="flex:1;aspect-ratio:unset;">entrega-panorama-2</div>
                             </div>
                             <div class="delivery-col-lateral">
-                                <div class="delivery-ph">entrega-7.jpg</div>
-                                <div class="delivery-ph">entrega-8.jpg</div>
+                                <img class="delivery-ph" src="entrega_7.png" alt="Entrega 7">
+                                <img class="delivery-ph" src="entrega_8.png" alt="Entrega 8">
                             </div>
                         </div>
                     </div>
@@ -2247,15 +2256,18 @@
 
         <div class="sobre-inner">
             <div class="sobre-text">
-                <p>A <span class="link-blue">Parametriza BIM</span> é uma empresa especializada em implantação BIM,
-                    parametrização e automação de processos para engenharia é liderada por <span
-                        class="link-blue">Danilo Barbosa</span>, Engenheiro Civil com especialização em BIM.</p>
-                <p>Atuamos na estruturação, padronização e otimização de fluxos de trabalho, desenvolvendo templates,
-                    bibliotecas paramétricas e automações com Dynamo e Python, com foco em aumentar produtividade,
-                    reduzir retrabalho e elevar a maturidade BIM das organizações.</p>
-                <p>Somos <span class="link-blue">parceiros estratégicos</span> de escritórios de engenharia estrutural e
-                    empresas de pré-fabricados em concreto, apoiando desde a implantação inicial até a consolidação de
-                    processos avançados e escaláveis.</p>
+                <p>Fundada em 2019, por Danilo Barbosa, a Parametriza BIM é especializada na implantação BIM,
+                    parametrização e automação de processos para projetos estruturais em <span
+                        class="link-blue">concreto armado, alvenaria
+                        estrutural e pré-fabricados de concreto</span>.</p>
+                <p>Entregamos organização de fluxos de trabalho, desenvolvimento de padrões internos, criação de
+                    bibliotecas paramétricas e implementação de automações que aumentam a consistência das informações e
+                    a eficiência das equipes.</p>
+                <p>Com participação em mais de 100 projetos em diversas soluções estruturais, já consolidamos processos
+                    mais produtivos e escaláveis em grandes escritórios de engenharia, unindo conhecimento técnico à
+                    visão estratégica de processos.</p>
+                <p>Se você busca uma parceria estratégica para mais controle, produtividade e qualidade nas entregas,
+                    entre em contato e conheça uma solução alinhada à sua operação.</p>
             </div>
 
             <div class="sobre-right">
@@ -2329,7 +2341,7 @@
                 <div class="footer-nav-grid">
                     <a href="#servicos">Serviços</a>
                     <a href="#beneficios">Benefícios</a>
-                    <a href="#entregas">Entregas</a>
+                    <a href="#portfolio">Portfólio</a>
                     <a href="#sobre">Sobre</a>
                     <a href="#feedbacks">Feedbacks</a>
                     <a href="#clientes">Clientes</a>

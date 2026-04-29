@@ -593,6 +593,22 @@
             display: block;
         }
 
+        .delivery-video {
+            width: 100%;
+            flex: 1;
+            border-radius: 4px;
+            display: block;
+            background: #000;
+        }
+
+        .delivery-central-img {
+            width: 100%;
+            flex: 1;
+            border-radius: 4px;
+            display: block;
+            object-fit: contain;
+        }
+
         .delivery-ph {
             flex: none;
             width: 100%;
@@ -608,7 +624,6 @@
         }
 
         img.delivery-ph {
-            object-fit: cover;
             display: block;
         }
 
@@ -1940,11 +1955,28 @@
                                 <img class="delivery-ph" src="entrega_6.png" alt="Entrega 6">
                             </div>
                             <div class="delivery-col-central">
-                                <div class="delivery-ph" style="flex:1;aspect-ratio:unset;">entrega-panorama-2</div>
+                                <video class="delivery-video" src="video.mp4" controls></video>
                             </div>
                             <div class="delivery-col-lateral">
                                 <img class="delivery-ph" src="entrega_7.png" alt="Entrega 7">
                                 <img class="delivery-ph" src="entrega_8.png" alt="Entrega 8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aba 3 -->
+                    <div class="deliveries-page">
+                        <div class="deliveries-grid">
+                            <div class="delivery-col-lateral">
+                                <img class="delivery-ph" src="entrega_9.png" alt="Entrega 9">
+                                <img class="delivery-ph" src="entrega_10.png" alt="Entrega 10">
+                            </div>
+                            <div class="delivery-col-central">
+                                <img class="delivery-central-img" src="entrega_central.png" alt="Entrega Central">
+                            </div>
+                            <div class="delivery-col-lateral">
+                                <img class="delivery-ph" src="entrega_11.png" alt="Entrega 11">
+                                <img class="delivery-ph" src="entrega_12.png" alt="Entrega 12">
                             </div>
                         </div>
                     </div>

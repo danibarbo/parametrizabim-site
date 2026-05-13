@@ -679,19 +679,16 @@
         }
 
         .feedback-avatar {
-            width: 46px;
-            height: 46px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             background: rgba(255, 255, 255, .15);
             border: 2px solid rgba(255, 255, 255, .3);
             flex-shrink: 0;
-            object-fit: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: rgba(255, 255, 255, .4);
-            text-align: center;
+
+            object-fit: fill;
+
+            display: block;
         }
 
         .feedback-author-info h4 {
@@ -1444,6 +1441,8 @@
             /* ENTREGAS */
             .deliveries {
                 margin-bottom: 44px;
+                padding-left: 10px;
+                padding-right: 10px;
             }
 
             .deliveries-slider-outer {
@@ -1477,15 +1476,16 @@
                 height: 100%;
             }
 
-            .delivery-col-lateral .delivery-ph:nth-child(2) {
-                display: none;
+            .delivery-col-lateral {
+                gap: 10px;
             }
 
             .delivery-ph {
-                aspect-ratio: unset;
+                aspect-ratio: 4 / 3;
                 min-height: 0;
                 width: 100%;
                 flex: 1;
+                object-fit: cover;
             }
 
             #panorama-entregas {
@@ -2003,14 +2003,16 @@
             <div class="feedback-card">
                 <h3>"Lorem Ipsum Dolor"</h3>
                 <div class="feedback-divider"></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
-                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
-                    magna.</p>
+                <p>A Parametriza BIM, representada por Danilo Barbosa, tem conduzido com responsabilidade e dentro do
+                    planejamento a implementação completa do BIM na Aspen Engenharia, com foco em estruturas de concreto
+                    moldado in loco, incluindo concreto armado e protendido.<br/><br/>
+                    Danilo demonstra sólido domínio como BIM Manager, atuando na estruturação dos processos, automações
+                    e capacitação da equipe.</p>
                 <div class="feedback-author">
-                    <div class="feedback-avatar">foto</div>
+                    <img class="feedback-avatar" src="imagem_lucas.png" alt="Avatar">
                     <div class="feedback-author-info">
-                        <h4>João da Silva</h4>
-                        <span>Diretor de Engenharia</span>
+                        <h4>Lucas Oliveira</h4>
+                        <span>Diretor de Engenharia – Aspen</span>
                     </div>
                 </div>
             </div>
@@ -2018,14 +2020,15 @@
             <div class="feedback-card">
                 <h3>"Lorem Ipsum Dolor"</h3>
                 <div class="feedback-divider"></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
-                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
-                    magna.</p>
+                <p>Empresa extremamente competente, sempre disponível para esclarecer dúvidas e comprometida em
+                    encontrar as melhores soluções. <br/><br/>
+                    Destaca-se também pela agilidade no atendimento e rapidez no
+                    retorno.</p>
                 <div class="feedback-author">
-                    <div class="feedback-avatar">foto</div>
+                    <img class="feedback-avatar" src="imagem_laura.png" alt="Avatar">
                     <div class="feedback-author-info">
-                        <h4>João da Silva</h4>
-                        <span>Diretor de Engenharia</span>
+                        <h4>Laura Fernandes</h4>
+                        <span>Projetista – Premovale</span>
                     </div>
                 </div>
             </div>
@@ -2033,14 +2036,15 @@
             <div class="feedback-card">
                 <h3>"Lorem Ipsum Dolor"</h3>
                 <div class="feedback-divider"></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu tempor mauris, et iaculis
-                    tortor. Integer vitae ante id metus aliquet feugiat. Maecenas quis condimentum nisl. Sed eu tortor
-                    magna.</p>
+                <p>O Danilo tem sido essencial no início da implantação BIM, ajudando na organização dos processos e na
+                    preparação do escritório para o Revit. <br/><br/>
+                    No dia a dia, é paciente, acessível e claro. A agilidade no
+                    suporte e a forma prática de resolver têm trazido mais segurança e alinhamento.</p>
                 <div class="feedback-author">
-                    <div class="feedback-avatar">foto</div>
+                    <img class="feedback-avatar" src="imagem_ana.png" alt="Avatar">
                     <div class="feedback-author-info">
-                        <h4>João da Silva</h4>
-                        <span>Diretor de Engenharia</span>
+                        <h4>Ana Alice Mariani</h4>
+                        <span>BIM Modeler – Aspen</span>
                     </div>
                 </div>
             </div>

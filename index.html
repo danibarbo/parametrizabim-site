@@ -1101,6 +1101,319 @@
             font-weight: 600;
         }
 
+        /* =========================================
+   MODAL BASE
+========================================= */
+
+        .delivery-modal {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.88);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+
+            z-index: 9999;
+        }
+
+        .delivery-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* =========================================
+   OVERLAY
+========================================= */
+
+        .delivery-modal-overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        /* =========================================
+   CONTENT
+========================================= */
+
+        .delivery-modal-content {
+
+            width: min(1100px, 92vw);
+            height: min(820px, 88vh);
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-direction: column;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        /* =========================================
+   MEDIA AREA
+========================================= */
+
+        .delivery-modal-media {
+
+            flex: 1;
+
+            min-height: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        /* =========================================
+   MEDIA
+========================================= */
+
+        .delivery-modal-img,
+        .delivery-modal-video,
+        .delivery-modal-iframe {
+
+            max-width: 100%;
+            max-height: 100%;
+
+            object-fit: contain;
+
+            display: none;
+        }
+
+        /* ACTIVE */
+
+        .delivery-modal-img.active,
+        .delivery-modal-video.active,
+        .delivery-modal-iframe.active {
+            display: block;
+        }
+
+        /* =========================================
+   IMAGE
+========================================= */
+
+        .delivery-modal-img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* =========================================
+   VIDEO
+========================================= */
+
+        .delivery-modal-video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* =========================================
+   IFRAME
+========================================= */
+
+        .delivery-modal-iframe {
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+        /* =========================================
+   CAPTION
+========================================= */
+
+        .delivery-modal-caption {
+
+            min-height: 72px;
+
+            padding: 18px 24px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+            font-size: 16px;
+            line-height: 1.5;
+
+            display: flex;
+            align-items: center;
+        }
+
+        /* =========================================
+   COUNTER
+========================================= */
+
+        .delivery-modal-counter {
+
+            position: absolute;
+
+            top: 18px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 5;
+
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            background: rgba(0, 0, 0, 0.45);
+
+            backdrop-filter: blur(6px);
+
+            padding: 8px 14px;
+
+            border-radius: 999px;
+        }
+
+        /* =========================================
+   CLOSE BUTTON
+========================================= */
+
+        .delivery-modal-close {
+
+            position: absolute;
+
+            top: 18px;
+            right: 18px;
+
+            z-index: 10;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: var(--azul-marca);
+
+            color: #fff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .delivery-modal-close:hover {
+            background: var(--azul-escuro);
+            transform: scale(1.05);
+        }
+
+        .delivery-modal-close svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =========================================
+   NAVIGATION BUTTONS
+========================================= */
+
+        .delivery-modal-nav {
+
+            position: absolute;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            z-index: 10;
+
+            flex-shrink: 0;
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+            border: 2px solid var(--azul-marca);
+
+            background: transparent;
+            color: var(--azul-marca);
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                background .2s,
+                color .2s,
+                opacity .2s,
+                transform .2s;
+        }
+
+        .delivery-modal-nav:hover {
+
+            background: var(--azul-marca);
+            color: #fff;
+
+            transform:
+                translateY(-50%) scale(1.05);
+        }
+
+        /* POSITIONS */
+
+        .delivery-modal-nav.prev {
+            left: 24px;
+        }
+
+        .delivery-modal-nav.next {
+            right: 24px;
+        }
+
+        /* SVG */
+
+        .delivery-modal-nav svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* =========================================
+   CLICKABLE ITEMS
+========================================= */
+
+        .delivery-ph,
+        .delivery-central-img,
+        .delivery-video,
+        .delivery-iframe {
+            cursor: pointer;
+        }
+
+        /* =========================================
+   SCROLLBAR OPTIONAL
+========================================= */
+
+        .delivery-modal-caption::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .delivery-modal-caption::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 960px) {
 
@@ -1488,6 +1801,10 @@
                 object-fit: cover;
             }
 
+            .delivery-modal-img {
+                object-fit: cover;
+            }
+
             #panorama-entregas {
                 width: 100%;
                 height: 100%;
@@ -1652,6 +1969,70 @@
 
             .footer-copy {
                 margin-top: 32px;
+            }
+
+            .delivery-modal-content {
+
+                width: 94vw;
+                height: 82vh;
+
+                border-radius: 14px;
+
+                margin-right: 35px;
+                margin-left: 35px;
+            }
+
+            /* BOTÕES */
+
+            .delivery-modal-nav {
+                width: 22px;
+                height: 22px;
+            }
+
+            .delivery-modal-nav svg {
+                width: 11px;
+                height: 11px;
+            }
+
+            .delivery-modal-nav.prev {
+                left: 8px;
+            }
+
+            .delivery-modal-nav.next {
+                right: 8px;
+            }
+
+            /* CLOSE */
+
+            .delivery-modal-close {
+                top: 12px;
+                right: 12px;
+                width: 24px;
+                height: 24px;
+            }
+
+            /* COUNTER */
+
+            .delivery-modal-counter {
+                top: 14px;
+                left: 50%;
+
+                transform: translateX(-50%);
+
+                font-size: 12px;
+
+                padding: 6px 10px;
+            }
+
+            /* CAPTION */
+
+            .delivery-modal-caption {
+
+                min-height: 60px;
+
+                padding: 14px 16px;
+
+                font-size: 12px;
             }
         }
 
@@ -1931,18 +2312,28 @@
                     <div class="deliveries-page">
                         <div class="deliveries-grid">
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_1.png" alt="Entrega 1">
-                                <img class="delivery-ph" src="entrega_2.png" alt="Entrega 2">
+                                <img class="delivery-ph" src="entrega_1.png" data-modal="entrega_1_modal.png"
+                                    alt="Entrega 1"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_2.png" data-modal="entrega_2_modal.png"
+                                    alt="Entrega 2"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                             <div class="delivery-col-central">
                                 <iframe id="panorama-entregas"
                                     src="https://pano.autodesk.com/pano.html?url=jpgs/c5a785f8-ebff-4243-b6d8-cd8185fc7599&version=2"
+                                    data-modal="https://pano.autodesk.com/pano.html?url=jpgs/c5a785f8-ebff-4243-b6d8-cd8185fc7599&version=2"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor."
                                     allowfullscreen>
                                 </iframe>
                             </div>
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_3.png" alt="Entrega 3">
-                                <img class="delivery-ph" src="entrega_4.png" alt="Entrega 4">
+                                <img class="delivery-ph" src="entrega_3.png" data-modal="entrega_3_modal.png"
+                                    alt="Entrega 3"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_4.png" data-modal="entrega_4_modal.png"
+                                    alt="Entrega 4"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                         </div>
                     </div>
@@ -1951,15 +2342,24 @@
                     <div class="deliveries-page">
                         <div class="deliveries-grid">
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_5.png" alt="Entrega 5">
-                                <img class="delivery-ph" src="entrega_6.png" alt="Entrega 6">
+                                <img class="delivery-ph" src="entrega_5.png" data-modal="entrega_5_modal.png"
+                                    alt="Entrega 5"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_6.png" data-modal="entrega_6_modal.png"
+                                    alt="Entrega 6"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                             <div class="delivery-col-central">
-                                <video class="delivery-video" src="video.mp4" controls></video>
+                                <video class="delivery-video" src="video.mp4" data-modal="video.mp4" controls
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor."></video>
                             </div>
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_7.png" alt="Entrega 7">
-                                <img class="delivery-ph" src="entrega_8.png" alt="Entrega 8">
+                                <img class="delivery-ph" src="entrega_7.png" data-modal="entrega_7_modal.png"
+                                    alt="Entrega 7"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_8.png" data-modal="entrega_8_modal.png"
+                                    alt="Entrega 8"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                         </div>
                     </div>
@@ -1968,15 +2368,25 @@
                     <div class="deliveries-page">
                         <div class="deliveries-grid">
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_9.png" alt="Entrega 9">
-                                <img class="delivery-ph" src="entrega_10.png" alt="Entrega 10">
+                                <img class="delivery-ph" src="entrega_9.png" data-modal="entrega_9_modal.png"
+                                    alt="Entrega 9"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_10.png" data-modal="entrega_10_modal.png"
+                                    alt="Entrega 10"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                             <div class="delivery-col-central">
-                                <img class="delivery-central-img" src="entrega_central.png" alt="Entrega Central">
+                                <img class="delivery-central-img" src="entrega_central.png"
+                                    data-modal="entrega_central_modal.png" alt="Entrega Central"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                             <div class="delivery-col-lateral">
-                                <img class="delivery-ph" src="entrega_11.png" alt="Entrega 11">
-                                <img class="delivery-ph" src="entrega_12.png" alt="Entrega 12">
+                                <img class="delivery-ph" src="entrega_11.png" data-modal="entrega_11_modal.png"
+                                    alt="Entrega 11"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
+                                <img class="delivery-ph" src="entrega_12.png" data-modal="entrega_12_modal.png"
+                                    alt="Entrega 12"
+                                    data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non gravida nisl, in maximus dui. Suspendisse tempus, tortor sit amet lobortis posuere, felis enim rhoncus nulla, non consequat mi nisi eget tortor.">
                             </div>
                         </div>
                     </div>
@@ -2039,11 +2449,14 @@
                 <h3>Clareza, praticidade e segurança</h3>
                 <div class="feedback-divider"></div>
                 <p>"O Danilo tem sido fundamental na fase inicial da nossa implantação BIM, contribuindo de forma
-                    contínua na estruturação dos processos e na preparação do escritório para o uso do Revit. <br/><br/>
-                    No contato direto do dia a dia, ele se mostra sempre muito paciente, acessível e claro nas orientações. A
+                    contínua na estruturação dos processos e na preparação do escritório para o uso do Revit.
+                    <br /><br />
+                    No contato direto do dia a dia, ele se mostra sempre muito paciente, acessível e claro nas
+                    orientações. A
                     agilidade no suporte e a forma prática como conduz as soluções têm sido essenciais para construirmos
                     uma base sólida e alinhada com a nossa realidade, trazendo mais segurança para a evolução da
-                    implantação."</p>
+                    implantação."
+                </p>
                 <div class="feedback-author">
                     <img class="feedback-avatar" src="imagem_ana.png" alt="Avatar">
                     <div class="feedback-author-info">
@@ -2305,6 +2718,92 @@
         <p class="footer-copy">© 2019 Parametriza BIM. Todos os Direitos Reservados.</p>
     </footer>
 
+    <!-- MODAL DELIVERY -->
+    <div class="delivery-modal" id="deliveryModal">
+
+        <div class="delivery-modal-overlay"></div>
+
+        <!-- CLOSE -->
+
+        <button class="delivery-modal-close" id="deliveryModalClose" aria-label="Fechar">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+
+            </svg>
+        </button>
+
+        <!-- PREV -->
+
+        <button class="delivery-modal-nav prev" id="deliveryModalPrev" aria-label="Anterior">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+
+                <polyline points="15 18 9 12 15 6" />
+
+            </svg>
+        </button>
+
+        <!-- CONTENT -->
+
+        <div class="delivery-modal-content">
+
+            <!-- COUNTER -->
+
+            <div class="delivery-modal-counter" id="deliveryModalCounter">
+
+                1 / 15
+
+            </div>
+
+            <!-- MEDIA -->
+
+            <div class="delivery-modal-media">
+
+                <!-- IMAGE -->
+
+                <img class="delivery-modal-img" id="deliveryModalImg" src="" alt="">
+
+                <!-- VIDEO -->
+
+                <video class="delivery-modal-video" id="deliveryModalVideo" controls playsinline>
+                </video>
+
+                <!-- IFRAME -->
+
+                <iframe class="delivery-modal-iframe" id="deliveryModalIframe" src="" allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <!-- CAPTION -->
+
+            <div class="delivery-modal-caption" id="deliveryModalCaption">
+
+                Texto da imagem
+
+            </div>
+
+        </div>
+
+        <!-- NEXT -->
+
+        <button class="delivery-modal-nav next" id="deliveryModalNext" aria-label="Próximo">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+
+                <polyline points="9 18 15 12 9 6" />
+
+            </svg>
+        </button>
+
+    </div>
+
     <script>
         function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
         function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
@@ -2351,6 +2850,335 @@
                 }
             }
         });
+
+        /* =========================================
+           SLIDER
+        ========================================= */
+
+        let deliveriesPageModal = 0;
+
+        function slideDeliveries(dir) {
+
+            const pages =
+                document.querySelectorAll('.deliveries-page');
+
+            const total = pages.length;
+
+            deliveriesPageModal = Math.max(
+                0,
+                Math.min(total - 1, deliveriesPageModal + dir)
+            );
+
+            document.getElementById('deliveriesSlider').style.transform =
+                `translateX(-${deliveriesPageModal * 100}%)`;
+
+            document.getElementById('deliveriesPrev').disabled =
+                deliveriesPageModal === 0;
+
+            document.getElementById('deliveriesNext').disabled =
+                deliveriesPageModal === total - 1;
+        }
+
+        /* =========================================
+           GALLERY ORDER
+        ========================================= */
+
+        const galleryItems = [];
+
+        document.querySelectorAll('.deliveries-page').forEach(page => {
+
+            const left = page.querySelectorAll(
+                '.delivery-col-lateral:first-child img'
+            );
+
+            const center = page.querySelectorAll(
+                '.delivery-col-central img, .delivery-col-central video, .delivery-col-central iframe'
+            );
+
+            const right = page.querySelectorAll(
+                '.delivery-col-lateral:last-child img'
+            );
+
+            galleryItems.push(
+                ...left,
+                ...center,
+                ...right
+            );
+        });
+
+        /* =========================================
+           MODAL ELEMENTS
+        ========================================= */
+
+        const modal =
+            document.getElementById('deliveryModal');
+
+        const modalImg =
+            document.getElementById('deliveryModalImg');
+
+        const modalVideo =
+            document.getElementById('deliveryModalVideo');
+
+        const modalIframe =
+            document.getElementById('deliveryModalIframe');
+
+        const modalCaption =
+            document.getElementById('deliveryModalCaption');
+
+        const modalCounter =
+            document.getElementById('deliveryModalCounter');
+
+        const closeBtn =
+            document.getElementById('deliveryModalClose');
+
+        const prevBtn =
+            document.getElementById('deliveryModalPrev');
+
+        const nextBtn =
+            document.getElementById('deliveryModalNext');
+
+        const overlay =
+            document.querySelector('.delivery-modal-overlay');
+
+        let currentIndex = 0;
+
+        /* =========================================
+           COUNTER
+        ========================================= */
+
+        function updateCounter() {
+
+            modalCounter.innerText =
+                `${currentIndex + 1} / ${galleryItems.length}`;
+        }
+
+        /* =========================================
+           RESET MEDIA
+        ========================================= */
+
+        function resetMedia() {
+
+            /* VIDEO */
+
+            modalVideo.pause();
+
+            modalVideo.currentTime = 0;
+
+            modalVideo.removeAttribute('src');
+
+            modalVideo.load();
+
+            modalVideo.classList.remove('active');
+
+            /* IFRAME */
+
+            modalIframe.src = '';
+
+            modalIframe.classList.remove('active');
+
+            /* IMAGE */
+
+            modalImg.removeAttribute('src');
+
+            modalImg.classList.remove('active');
+        }
+
+        /* =========================================
+           OPEN MODAL
+        ========================================= */
+
+        function openModal(index) {
+
+            currentIndex = index;
+
+            const item =
+                galleryItems[currentIndex];
+
+            const tag =
+                item.tagName.toLowerCase();
+
+            resetMedia();
+
+            /* CAPTION */
+
+            modalCaption.innerText =
+                item.dataset.caption || '';
+
+            /* IMAGE */
+
+            if (tag === 'img') {
+
+                modalImg.src =
+                    item.dataset.modal || item.src;
+
+                modalImg.alt =
+                    item.alt || '';
+
+                modalImg.classList.add('active');
+            }
+
+            /* VIDEO */
+
+            else if (tag === 'video') {
+
+                modalVideo.src =
+                    item.dataset.modal || item.src;
+
+                modalVideo.classList.add('active');
+            }
+
+            /* IFRAME */
+
+            else if (tag === 'iframe') {
+
+                modalIframe.src =
+                    item.dataset.modal || item.src;
+
+                modalIframe.classList.add('active');
+            }
+
+            updateCounter();
+
+            modal.classList.add('active');
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        /* =========================================
+           CLOSE MODAL
+        ========================================= */
+
+        function closeModal() {
+
+            modal.classList.remove('active');
+
+            resetMedia();
+
+            document.body.style.overflow = '';
+        }
+
+        /* =========================================
+           NEXT
+        ========================================= */
+
+        function showNext() {
+
+            currentIndex =
+                (currentIndex + 1) % galleryItems.length;
+
+            openModal(currentIndex);
+        }
+
+        /* =========================================
+           PREV
+        ========================================= */
+
+        function showPrev() {
+
+            currentIndex =
+                (currentIndex - 1 + galleryItems.length) %
+                galleryItems.length;
+
+            openModal(currentIndex);
+        }
+
+        /* =========================================
+           CLICK OPEN
+        ========================================= */
+
+        galleryItems.forEach((item, index) => {
+
+            item.style.cursor = 'pointer';
+
+            item.addEventListener('click', () => {
+
+                openModal(index);
+            });
+        });
+
+        /* =========================================
+           BUTTON EVENTS
+        ========================================= */
+
+        closeBtn.addEventListener(
+            'click',
+            closeModal
+        );
+
+        overlay.addEventListener(
+            'click',
+            closeModal
+        );
+
+        nextBtn.addEventListener(
+            'click',
+            showNext
+        );
+
+        prevBtn.addEventListener(
+            'click',
+            showPrev
+        );
+
+        /* =========================================
+           KEYBOARD
+        ========================================= */
+
+        document.addEventListener('keydown', (e) => {
+
+            if (!modal.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+
+                closeModal();
+            }
+
+            if (e.key === 'ArrowRight') {
+
+                showNext();
+            }
+
+            if (e.key === 'ArrowLeft') {
+
+                showPrev();
+            }
+        });
+
+        /* =========================================
+           TOUCH SWIPE MOBILE
+        ========================================= */
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        modal.addEventListener('touchstart', (e) => {
+
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        modal.addEventListener('touchend', (e) => {
+
+            touchEndX = e.changedTouches[0].screenX;
+
+            const diff =
+                touchStartX - touchEndX;
+
+            /* SWIPE LEFT */
+
+            if (diff > 50) {
+
+                showNext();
+            }
+
+            /* SWIPE RIGHT */
+
+            if (diff < -50) {
+
+                showPrev();
+            }
+        });
+
+
     </script>
 
     <!DOCTYPE html>
